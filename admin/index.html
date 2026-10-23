@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#201b19">
+    <title>Admin | AVELUNE</title>
+    <link rel="icon" type="image/png" href="../images/avelune-favicon.png">
+    <link rel="stylesheet" href="./admin.css?v=13">
+    <script src="./admin.js?v=14" defer></script>
+</head>
+<body>
+    <main class="login-shell" id="login-shell">
+        <a class="brand" href="/" aria-label="AVELUNE home"><img src="../images/avelune-favicon.png" alt="AVELUNE logo"><span><small>STORE ADMIN</small></span></a>
+        <form class="login-card" id="login-form">
+            <p class="eyebrow">WELCOME BACK</p>
+            <h1>Admin sign in</h1>
+            <p class="muted">Sign in to manage products, branches and customer orders.</p>
+            <label>Username<input name="username" autocomplete="username" required></label>
+            <label>Password
+                <span class="password-field">
+                    <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+                    <button class="password-toggle" id="password-toggle" type="button" aria-label="Show password" aria-pressed="false">
+                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path class="password-eye" d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"></path>
+                            <circle class="password-eye" cx="12" cy="12" r="2.7"></circle>
+                            <path class="password-eye-slash" d="m4 4 16 16"></path>
+                        </svg>
+                    </button>
+                </span>
+            </label>
+            <button class="button primary full" type="submit">Sign in securely</button>
+            <p class="form-message" id="login-message" role="alert"></p>
+            <a class="back-link" href="/">Back to storefront</a>
+        </form>
+    </main>
+
+    <div class="admin-app" id="admin-app" hidden>
+        <aside class="sidebar" id="sidebar">
+            <a class="brand" href="/" aria-label="AVELUNE home"><img src="../images/avelune-favicon.png" alt="AVELUNE logo"><span><small>STORE ADMIN</small></span></a>
+            <p class="side-label">WORKSPACE</p>
+            <nav class="side-nav" aria-label="Admin navigation">
+                <button class="nav-item active" data-view="overview"><span>◫</span> Overview</button>
+                <button class="nav-item" data-view="products"><span>▦</span> Products</button>
+                <button class="nav-item" data-view="sales"><span>%</span> Sales</button>
+                <button class="nav-item" data-view="branches"><span>⌖</span> Branches</button>
+                <button class="nav-item" data-view="orders"><span>▤</span> Orders <span class="nav-count" id="pending-count">0</span></button>
+                <button class="nav-item" data-view="store"><span>⚙</span> Store details</button>
+                <button class="nav-item" data-view="account"><span>♙</span> Account security</button>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="store-link" href="/" target="_blank" rel="noreferrer">↗ <span>View storefront</span></a>
+                <button class="nav-item logout" id="logout-button"><span>⇥</span> Sign out</button>
+            </div>
+        </aside>
+
+        <section class="workspace">
+            <header class="topbar">
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+                <div><p class="eyebrow">AVELUNE / ADMIN</p><h1 id="view-title">Overview</h1></div>
+                <div class="admin-user"><span class="user-avatar"><img src="../images/avelune-favicon.png" alt="AVELUNE logo"></span><span id="admin-username">Admin</span></div>
+            </header>
+
+            <main class="view-area">
+                <section class="view active" id="view-overview">
+                    <div class="welcome-banner">
+                        <div><p class="eyebrow">YOUR STORE AT A GLANCE</p><h2>Good to see you.</h2><p>Manage your collection and keep orders moving.</p></div>
+                        <span class="banner-mark">A</span>
+                    </div>
+                    <div class="stats-grid">
+                        <article class="stat-card"><span>Active products</span><strong id="stat-products">—</strong><small>Across all collections</small></article>
+                        <article class="stat-card"><span>Pending orders</span><strong id="stat-pending">—</strong><small>Need your attention</small></article>
+                        <article class="stat-card"><span>Orders today</span><strong id="stat-today">—</strong><small>Cash on delivery</small></article>
+                        <article class="stat-card"><span>Active branches</span><strong id="stat-branches">—</strong><small>Store locations</small></article>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-heading"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Latest orders</h2></div><button class="text-button" data-go="orders">View all orders →</button></div>
+                        <div class="table-wrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th></tr></thead><tbody id="recent-orders"></tbody></table></div>
+                    </div>
+                </section>
+
+                <section class="view" id="view-products">
+                    <div class="view-heading"><div><p class="eyebrow">YOUR COLLECTION</p><h2>Products</h2><p class="muted">Edit your catalogue, prices, stock and homepage picks.</p></div><button class="button primary" id="add-product">＋ Add product</button></div>
+                    <div class="toolbar"><input id="product-search" type="search" placeholder="Search products..." aria-label="Search products"><select id="product-filter" aria-label="Filter products"><option value="all">All categories</option><option value="men">Men</option><option value="women">Women</option><option value="children">Children</option></select></div>
+                    <div class="panel table-wrap"><table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Homepage</th><th>Status</th><th></th></tr></thead><tbody id="products-table"></tbody></table><p class="empty-state" id="products-empty" hidden>No products match your search.</p></div>
+                </section>
+
+                <section class="view" id="view-sales">
+                    <div class="view-heading"><div><p class="eyebrow">PROMOTIONS</p><h2>Product sales</h2><p class="muted">Apply percentage discounts to active products. Sale prices are calculated from each product's regular price.</p></div></div>
+                    <form class="panel sale-form" id="sale-form">
+                        <label>Product<select id="sale-product" name="productId" required></select></label>
+                        <label>Discount percentage<input id="sale-percent" name="percent" type="number" min="1" max="99" step="1" placeholder="e.g. 20" required></label>
+                        <div class="sale-preview" id="sale-preview" aria-live="polite">Choose a product and discount to preview the sale price.</div>
+                        <div class="form-actions sale-actions"><p class="form-message" id="sale-message" role="status"></p><button class="button primary" type="submit">Apply sale</button></div>
+                    </form>
+                    <div class="panel sales-panel">
+                        <div class="panel-heading"><div><p class="eyebrow">CURRENT OFFERS</p><h2>Products on sale</h2></div></div>
+                        <div class="table-wrap"><table><thead><tr><th>Product</th><th>Discount</th><th>Regular price</th><th>Sale price</th><th></th></tr></thead><tbody id="sales-table"></tbody></table><p class="empty-state" id="sales-empty" hidden>No products are currently on sale.</p></div>
+                    </div>
+                </section>
+
+                <section class="view" id="view-branches">
+                    <div class="view-heading"><div><p class="eyebrow">WHERE TO FIND US</p><h2>Branches</h2><p class="muted">Update store addresses, opening hours and map links.</p></div><button class="button primary" id="add-branch">＋ Add branch</button></div>
+                    <div class="branch-grid" id="branches-list"></div>
+                </section>
+
+                <section class="view" id="view-orders">
+                    <div class="view-heading"><div><p class="eyebrow">CASH ON DELIVERY</p><h2>Orders</h2><p class="muted">Review orders and update fulfilment status.</p></div></div>
+                    <div class="toolbar"><input id="order-search" type="search" placeholder="Search orders or customers..." aria-label="Search orders"><select id="order-filter" aria-label="Filter orders"><option value="all">All statuses</option><option value="pending">Pending</option><option value="confirmed">Confirmed</option><option value="shipped">Shipped</option><option value="delivered">Delivered</option><option value="cancelled">Cancelled</option></select></div>
+                    <div class="panel table-wrap"><table><thead><tr><th>Order</th><th>Customer & delivery</th><th>Items</th><th>Total</th><th>Placed</th><th>Status</th></tr></thead><tbody id="orders-table"></tbody></table><p class="empty-state" id="orders-empty" hidden>No orders to show yet.</p></div>
+                </section>
+
+                <section class="view" id="view-store">
+                    <div class="view-heading"><div><p class="eyebrow">PUBLIC STORE INFORMATION</p><h2>Store details</h2><p class="muted">Update the contact details shown on your branches page.</p></div></div>
+                    <form class="panel settings-form" id="settings-form">
+                        <label class="wide">Welcome message<textarea name="welcome" rows="3" required></textarea></label>
+                        <label>Opening hours<input name="openingHours" required></label>
+                        <label>Phone<input name="phone" required></label>
+                        <label>WhatsApp<input name="whatsapp"></label>
+                        <label>Email <span>Order notifications are sent here</span><input name="email" type="email" required></label>
+                        <label>Facebook URL<input name="facebook" type="url"></label>
+                        <label>Instagram URL<input name="instagram" type="url"></label>
+                        <div class="wide form-actions"><p class="form-message" id="settings-message" role="status"></p><button class="button primary" type="submit">Save store details</button></div>
+                    </form>
+                </section>
+
+                <section class="view" id="view-account">
+                    <div class="view-heading"><div><p class="eyebrow">SIGN-IN & SECURITY</p><h2>Account security</h2><p class="muted">Change your admin username or password. Your current password is required to confirm.</p></div></div>
+                    <form class="panel settings-form account-form" id="account-form">
+                        <label>New username <span>(leave blank to keep the current username)</span><input name="newUsername" autocomplete="username" maxlength="100"></label>
+                        <label class="wide">Current password<span class="password-field">
+                            <input name="currentPassword" type="password" autocomplete="current-password" required>
+                            <button class="password-toggle" type="button" data-password-target="currentPassword" aria-label="Show current password" aria-pressed="false">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="password-eye" d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"></path><circle class="password-eye" cx="12" cy="12" r="2.7"></circle><path class="password-eye-slash" d="m4 4 16 16"></path></svg>
+                            </button>
+                        </span></label>
+                        <label>New password <span>(leave blank to keep the current password)</span><span class="password-field">
+                            <input name="newPassword" type="password" autocomplete="new-password" minlength="8" maxlength="256">
+                            <button class="password-toggle" type="button" data-password-target="newPassword" aria-label="Show new password" aria-pressed="false">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="password-eye" d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"></path><circle class="password-eye" cx="12" cy="12" r="2.7"></circle><path class="password-eye-slash" d="m4 4 16 16"></path></svg>
+                            </button>
+                        </span></label>
+                        <label>Confirm new password<span class="password-field">
+                            <input name="confirmPassword" type="password" autocomplete="new-password" maxlength="256">
+                            <button class="password-toggle" type="button" data-password-target="confirmPassword" aria-label="Show password confirmation" aria-pressed="false">
+                                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="password-eye" d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"></path><circle class="password-eye" cx="12" cy="12" r="2.7"></circle><path class="password-eye-slash" d="m4 4 16 16"></path></svg>
+                            </button>
+                        </span></label>
+                        <div class="wide form-actions"><p class="form-message" id="account-message" role="status"></p><button class="button primary" type="submit">Update admin account</button></div>
+                        <p class="wide account-note">Updating your account signs out other active admin sessions. This session will stay signed in.</p>
+                    </form>
+                </section>
+            </main>
+        </section>
+    </div>
+
+    <dialog class="editor-dialog" id="product-dialog">
+        <form id="product-form" class="dialog-form">
+            <div class="dialog-heading"><div><p class="eyebrow">CATALOGUE</p><h2 id="product-dialog-title">Add product</h2></div><button type="button" class="icon-button" data-close="product-dialog" aria-label="Close">×</button></div>
+            <input type="hidden" name="id">
+            <label>Product name<input name="name" required maxlength="100"></label>
+            <label>Description<textarea name="description" rows="3" maxlength="500"></textarea></label>
+            <div class="form-row"><label>Category<select name="category" required><option value="men">Men</option><option value="women">Women</option><option value="children">Children</option></select></label><label>Select product image<select name="image" id="image-select" required><option value="">Choose an image</option></select></label></div>
+            <div class="product-image-upload">
+                <div class="product-image-preview" id="product-image-preview" aria-live="polite"><span>Select an image to preview it here</span></div>
+                <div class="product-image-upload-copy">
+                    <strong id="image-upload-title">Upload a product image</strong>
+                    <p id="image-upload-description">Choose a photo from your phone or computer. Uploading or selecting another image will replace the current product image when saved. JPG, PNG, or WebP · up to 3 MB.</p>
+                    <label class="upload-button" for="image-upload">Choose from device<input id="image-upload" type="file" accept="image/jpeg,image/png,image/webp"></label>
+                    <span class="upload-status" id="image-upload-status" role="status">Your image will upload securely when selected.</span>
+                </div>
+            </div>
+            <div class="form-row"><label>Price<input name="price" type="number" min="0" step="0.01" required></label><label>Original price<input name="originalPrice" type="number" min="0" step="0.01" required></label></div>
+            <div class="form-row"><label>Stock<input name="stock" type="number" min="0" step="1" required></label><span class="checkboxes"><label><input name="featured" type="checkbox"> Show on homepage</label><label><input name="active" type="checkbox" checked> Active</label></span></div>
+            <p class="form-message" id="product-message" role="alert"></p>
+            <div class="form-actions"><button type="button" class="button secondary" data-close="product-dialog">Cancel</button><button class="button primary" type="submit">Save product</button></div>
+        </form>
+    </dialog>
+
+    <dialog class="editor-dialog" id="branch-dialog">
+        <form id="branch-form" class="dialog-form">
+            <div class="dialog-heading"><div><p class="eyebrow">STORE LOCATIONS</p><h2 id="branch-dialog-title">Add branch</h2></div><button type="button" class="icon-button" data-close="branch-dialog" aria-label="Close">×</button></div>
+            <input type="hidden" name="id">
+            <label>Branch name<input name="name" required maxlength="100"></label>
+            <label>Address<input name="address" required maxlength="300"></label>
+            <div class="form-row"><label>Phone<input name="phone" maxlength="40"></label><label>Opening hours<input name="hours" maxlength="120"></label></div>
+            <label>Google Maps embed URL<input name="mapUrl" type="url" placeholder="https://www.google.com/maps/embed?..."></label>
+            <label class="checkboxes"><span><input name="active" type="checkbox" checked> Active branch</span></label>
+            <p class="form-message" id="branch-message" role="alert"></p>
+            <div class="form-actions"><button type="button" class="button secondary" data-close="branch-dialog">Cancel</button><button class="button primary" type="submit">Save branch</button></div>
+        </form>
+    </dialog>
+
+    <dialog class="editor-dialog order-dialog" id="order-dialog">
+        <div class="dialog-form">
+            <div class="dialog-heading"><div><p class="eyebrow">ORDER DETAILS</p><h2 id="order-dialog-title">Order</h2></div><button type="button" class="icon-button" data-close="order-dialog" aria-label="Close">×</button></div>
+            <div id="order-detail"></div>
+        </div>
+    </dialog>
+</body>
+</html>

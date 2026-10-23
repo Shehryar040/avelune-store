@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Page metadata controls browser sizing, theme color, search description, and title. -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f5ef">
+    <meta name="description" content="Shop children's, women's, and men's clothing. Personalize your garment with a custom AVELUNE heat-press print.">
+    <title>Shop custom clothing | AVELUNE</title>
+    <!-- Shared and page-specific stylesheets plus scripts that power cart and catalog behavior. -->
+    <link rel="icon" type="image/png" href="images/avelune-favicon.png">
+    <link rel="stylesheet" href="css/Normalize.css">
+    <link rel="stylesheet" href="css/OurOffer.css?v=3">
+    <link rel="stylesheet" href="css/avelune.css?v=3">
+    <link rel="stylesheet" href="css/collections.css?v=1">
+    <script src="js/avelune-cart.js?v=3" defer></script>
+    <script src="js/storefront.js?v=9" defer></script>
+</head>
+<body class="collections-page">
+    <!-- Announcement bar highlights the custom-print service and payment option. -->
+    <div class="announcement">Custom heat-press clothing for kids, women, and men · Cash on delivery</div>
+    <!-- Main site header provides the AVELUNE brand, navigation, and live bag count. -->
+    <header class="av-header">
+        <a class="wordmark" href="index.html" aria-label="AVELUNE home"><img src="images/avelune-favicon.png" alt="">AVE<span>LUNE</span></a>
+        <nav class="av-nav" aria-label="Main navigation">
+            <a href="OurOffers.html" aria-current="page">Shop clothing</a><a href="how-it-works.html">How it works</a>
+            <a href="AboutUs.html">Our story</a><button class="bag-link" id="cart-toggle" type="button">Bag <span class="bag-count" id="cart-count" data-cart-count>0</span></button>
+        </nav>
+    </header>
+    <main class="av-main">
+        <!-- Hero introduces the clothing collection and links to garment customization. -->
+        <section class="shop-hero">
+            <p class="eyebrow">THE AVELUNE CUSTOM CLOTHING STUDIO</p>
+            <h1>For every age.<br><em>Made your way.</em></h1>
+            <p>Shop clothing for children, women, and men, then add a custom heat-press print made to your choice.</p>
+            <a class="shop-cta" href="product.html">Design your garment <span>↗</span></a>
+        </section>
+        <!-- Product catalog is populated by JavaScript and filtered by clothing audience or sale status. -->
+        <section class="catalog av-wrap" id="catalog">
+            <div class="catalog-heading"><div><p class="eyebrow">SHOP BY COLLECTION</p><h2>Choose who it's for.</h2></div><span class="catalog-note">Kids · Women · Men · PKR</span></div>
+            <nav class="category-tabs" aria-label="Clothing audience filters">
+                <button class="category-tab active" type="button" data-category="all" aria-pressed="true">All clothing</button>
+                <button class="category-tab" type="button" data-category="children" aria-pressed="false">Kids</button>
+                <button class="category-tab" type="button" data-category="women" aria-pressed="false">Women</button>
+                <button class="category-tab" type="button" data-category="men" aria-pressed="false">Men</button>
+                <button class="category-tab" type="button" data-category="sale" aria-pressed="false">On offer</button>
+            </nav>
+            <div class="product-grid" id="product-grid" aria-live="polite"><p class="loading-message">Loading the AVELUNE collection…</p></div>
+        </section>
+        <!-- Custom-design banner explains personalization and links to the ordering guide. -->
+        <section class="av-wrap section collection-prompt">
+            <div class="inspiration-banner"><div><p class="eyebrow">YOUR DESIGN, YOUR CHOICE</p><h2>Have a print in mind?</h2><p>Tell us the words or artwork, colors, and placement you want. We'll heat-press your custom design onto your chosen clothing.</p><a class="button button-lime" href="how-it-works.html">See how it works ↗</a></div><div class="inspiration-art" aria-hidden="true"><div class="art-tile">your<br>design</div><div class="art-tile">made<br>for you</div><div class="art-tile">heat<br>pressed</div></div></div>
+        </section>
+    </main>
+    <!-- Backdrop and drawer provide the interactive shopping-bag summary and checkout controls. -->
+    <div class="cart-backdrop" id="cart-backdrop"></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-label="Shopping bag" aria-hidden="true">
+        <div class="drawer-header"><div><p class="eyebrow">YOUR PERSONAL PICKS</p><h2>Shopping bag</h2></div><button class="icon-close" id="cart-close" type="button" aria-label="Close shopping bag">×</button></div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer"><div class="cart-total"><span>Subtotal</span><strong id="cart-total">PKR 0.00</strong></div><p>Cash on delivery. Your garment and design notes travel with your order.</p><button class="shop-cta checkout-button" id="checkout-open" type="button" disabled>Review your bag →</button><p><a href="cart.html">Open full bag &amp; checkout</a></p></div>
+    </aside>
+    <!-- Status message is shown after an order is successfully placed. -->
+    <div class="order-confirmation" id="order-confirmation" role="status" hidden><span></span><button type="button" id="order-confirmation-close" aria-label="Dismiss order confirmation">×</button></div>
+    <!-- Footer repeats the brand and provides secondary page links and copyright. -->
+    <footer class="av-footer"><div class="av-wrap"><div class="footer-row"><a class="wordmark" href="index.html"><img src="images/avelune-favicon.png" alt="">AVE<span>LUNE</span></a><div class="footer-links"><a href="how-it-works.html">How it works</a><a href="AboutUs.html">Our story</a><a href="cart.html">Your bag</a></div></div><div class="copyright">© 2026 AVELUNE. Custom clothing for everyone.</div></div></footer>
+</body>
+</html>

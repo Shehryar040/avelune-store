@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f5ef">
+    <title>Checkout | AVELUNE</title>
+    <link rel="icon" type="image/png" href="images/avelune-favicon.png">
+    <link rel="stylesheet" href="css/avelune.css?v=3">
+    <script src="js/avelune-cart.js?v=3" defer></script>
+    <script src="js/avelune-pages.js?v=4" defer></script>
+</head>
+<body data-page="checkout">
+    <div class="announcement">Custom heat-press clothing for kids, women, and men · Cash on delivery</div>
+    <header class="av-header"><a class="wordmark" href="index.html"><img src="images/avelune-favicon.png" alt="">AVE<span>LUNE</span></a><nav class="av-nav" aria-label="Main navigation"><a href="OurOffers.html">Shop clothing</a><a href="how-it-works.html">How it works</a><a href="AboutUs.html">Our story</a><a class="bag-link" href="cart.html">Bag <span class="bag-count" data-cart-count>0</span></a></nav></header>
+    <main class="av-main av-wrap">
+        <section class="page-heading"><p class="eyebrow">CASH ON DELIVERY</p><h1>Almost <em>yours.</em></h1><p>Share your delivery details. You’ll pay when your AVELUNE order arrives.</p></section>
+        <div class="checkout-layout">
+            <form class="checkout-form" id="checkout-form">
+                <h2>Where should we deliver?</h2>
+                <label>Full name<input name="customerName" autocomplete="name" required maxlength="100"></label>
+                <label>Email address<input name="email" type="email" autocomplete="email" required maxlength="254" placeholder="you@example.com"><span>A receipt will be sent to this address.</span></label>
+                <label>Phone number<input name="phone" type="tel" autocomplete="tel" required maxlength="40" placeholder="+92…"></label>
+                <label>Delivery address<textarea name="address" autocomplete="street-address" rows="3" required maxlength="300"></textarea></label>
+                <label>Order note <span>(optional)</span><textarea name="note" rows="3" maxlength="500" placeholder="Anything else we should know?"></textarea></label>
+                <p class="checkout-message" id="checkout-message" role="alert"></p>
+                <button class="button button-dark" id="place-order" type="submit">Place cash-on-delivery order →</button>
+                <p class="shipping-note">Your payment is collected in cash when your order is delivered. Custom options and design notes are saved with your order.</p>
+            </form>
+            <aside class="checkout-summary"><h2>Your custom pieces</h2><div id="checkout-summary"><p class="page-error">Loading your order…</p></div><div class="summary-total"><span>Total due on delivery</span><strong id="checkout-grand-total">PKR 0.00</strong></div><p class="shipping-note">Subtotal <strong id="checkout-subtotal">PKR 0.00</strong></p><a class="text-link" href="cart.html">← Back to your bag</a></aside>
+        </div>
+        <section class="checkout-success" id="checkout-success" hidden><span aria-hidden="true">✓</span><h2>Made with your idea in mind.</h2><p id="checkout-success-message"></p><a class="button button-dark" href="index.html">Back to AVELUNE</a></section>
+    </main>
+    <footer class="av-footer"><div class="av-wrap"><div class="footer-row"><a class="wordmark" href="index.html"><img src="images/avelune-favicon.png" alt="">AVE<span>LUNE</span></a><div class="footer-links"><a href="OurOffers.html">Shop clothing</a><a href="how-it-works.html">How it works</a><a href="AboutUs.html">Our story</a></div></div><div class="copyright">© 2026 AVELUNE. Custom clothing for everyone.</div></div></footer>
+</body>
+</html>
